@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PostApp</title>
+    <title>TweetApp</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -14,6 +14,12 @@
         <%= link_to("PostApp", "/") %>
       </div>
       <ul class="header-menus">
+        <% if session[:user_id] %>
+          <li>
+            現在ログインしているユーザーのid:
+            <%= session[:user_id] %>
+          </li>
+        <% end %>
         <li>
           <%= link_to("PostAppとは", "/about") %>
         </li>
@@ -24,18 +30,23 @@
           <%= link_to("新規投稿", "/posts/new") %>
         </li>
         <li>
-         <%= link_to("ユーザー一覧", "/users/index") %>
+          <%= link_to("ユーザー一覧", "/users/index") %>
         </li>
         <li>
           <%= link_to("新規登録", "/signup") %>
         </li>
+        <li>
+          <%= link_to("ログイン", "/login") %>
+        </li>
       </ul>
     </header>
+
     <% if flash[:notice] %>
       <div class="flash">
         <%= flash[:notice] %>
       </div>
     <% end %>
+
     <%= yield %>
   </body>
 </html>
